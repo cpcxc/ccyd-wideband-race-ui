@@ -4,7 +4,7 @@
       <router-view/>
     </el-main>
     <el-footer class="footer" height="48px">
-		  <span>吉林省高等学校毕业生就业指导中心 © 2017</span>
+		  <span>中国移动吉林分公司长春公司 © 2018</span>
 		</el-footer>
   </el-container>
 </template>

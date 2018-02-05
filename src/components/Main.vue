@@ -3,92 +3,73 @@
 	  	<transition name="form-fade" mode="in-out">
 	  		<el-card class="box-card">
           <div slot="header" class="clearfix">
-            <span>流动党员信息确认</span>
+            <span>长春分公司员工宽带竞赛开</span>
           </div>
-		    	<el-form class="main" :model="partyForm" :rules="rules" ref="partyForm" :status-icon="true" :show-message="false" size="small">
-						<el-form-item prop="xh" label="序号">
-							<el-input v-model="partyForm.xh" :readonly="true"></el-input>
+		    	<el-form class="main" :model="dataForm" :rules="rules" ref="dataForm" 
+            :status-icon="true" :show-message="false" size="small" >
+						<el-form-item prop="dept" label="员工部门">
+							<el-input v-model="dataForm.dept"></el-input>
 						</el-form-item>
-						<el-form-item prop="xm" label="姓名">
-							<el-input v-model="partyForm.xm"></el-input>
+						<el-form-item prop="name" label="员工姓名">
+							<el-input v-model="dataForm.name"></el-input>
 						</el-form-item>
-						<el-form-item prop="szdzb" label="所在党支部">
-							<el-input v-model="partyForm.szdzb"></el-input>
+						<el-form-item prop="number" label="员工编号">
+							<el-input v-model="dataForm.number"></el-input>
 						</el-form-item>
-						<el-form-item prop="sfzh" label="公民身份证号">
-							<el-input v-model="partyForm.sfzh"></el-input>
+						<el-form-item prop="mobile" label="员工手机号">
+							<el-input v-model="dataForm.mobile"></el-input>
 						</el-form-item>
-						<el-form-item prop="xb" label="性别">
-							<el-input v-model="partyForm.xb"></el-input>
+            <el-radio-group v-model="type" size="small" :style="{margin: '10px'}">
+              <el-radio-button label="0">有可安装小区</el-radio-button>
+              <el-radio-button label="1">无可安装小区</el-radio-button>
+            </el-radio-group>              
+						<el-form-item prop="area" label="用户区域">
+              <el-select v-model="dataForm.area" placeholder="请选择区域">
+                <el-option
+                      v-for="(item,i) in areas"
+                      :key="i"
+                      :label="item"
+                      :value="item">
+                    </el-option>              
+              </el-select>
 						</el-form-item>
-						<el-form-item prop="mz" label="民族">
-							<el-input v-model="partyForm.mz"></el-input>
+						<el-form-item prop="village" label="用户小区" v-if="type == '0'" >
+              <el-select v-model="dataForm.village" placeholder="请选择小区">
+                <el-option
+                      v-for="(item,i) in villages"
+                      :key="i"
+                      :label="item"
+                      :value="item">
+                    </el-option>              
+              </el-select>
 						</el-form-item>
-						<el-form-item prop="csrq" label="出生日期">
-							<el-input v-model="partyForm.csrq"></el-input>
+						<el-form-item prop="village" label="希望开通移动宽带的小区" v-if="type == '1'">
+							<el-input v-model="dataForm.village"></el-input>
 						</el-form-item>
-						<el-form-item prop="xl" label="学历">
-							<el-input v-model="partyForm.xl"></el-input>
+						<el-form-item prop="building" label="用户楼栋" v-if="type == '0'">
+							<el-input v-model="dataForm.building"></el-input>
 						</el-form-item>
-						<el-form-item prop="rylb" label="人员类别">
-							<el-input v-model="partyForm.rylb"></el-input>
+						<el-form-item prop="unit" label="用户单元" v-if="type == '0'">
+							<el-input v-model="dataForm.unit"></el-input>
 						</el-form-item>
-						<el-form-item prop="rdrq" label="加入党组织日期">
-							<el-input v-model="partyForm.rdrq"></el-input>
+						<el-form-item prop="door" label="用户门牌号" v-if="type == '0'">
+							<el-input v-model="dataForm.door"></el-input>
 						</el-form-item>
-						<el-form-item prop="zzrq" label="转为正式党员日期">
-							<el-input v-model="partyForm.zzrq"></el-input>
+						<el-form-item prop="user_name" label="办理人姓名">
+							<el-input v-model="dataForm.user_name"></el-input>
 						</el-form-item>
-						<el-form-item prop="gzgw" label="工作岗位">
-							<el-input v-model="partyForm.gzgw"></el-input>
+						<el-form-item prop="user_contact" label="办理人联系电话">
+							<el-input v-model="dataForm.user_contact"></el-input>
 						</el-form-item>
-						<el-form-item prop="sjh" label="手机号">
-							<el-input v-model="partyForm.sjh"></el-input>
+						<el-form-item prop="user_mobile" label="融合主卡号码" v-if="type == '0'">
+							<el-input v-model="dataForm.user_mobile"></el-input>
 						</el-form-item>
-						<el-form-item prop="gddh" label="固定电话">
-							<el-input v-model="partyForm.gddh"></el-input>
-						</el-form-item>
-						<el-form-item prop="jtzz" label="家庭住址">
-							<el-input v-model="partyForm.jtzz"></el-input>
-						</el-form-item>
-						<el-form-item prop="djzt" label="党籍状态">
-							<el-input v-model="partyForm.djzt"></el-input>
-						</el-form-item>
-						<el-form-item prop="sfld" label="是否为流动党员">
-							<el-input v-model="partyForm.sfld"></el-input>
-						</el-form-item>
-						<el-form-item prop="wclx" label="外出流向">
-							<el-input v-model="partyForm.wclx"></el-input>
-						</el-form-item>
-              <el-radio-group v-model="type" size="small">
-                <el-radio-button label="0">党组织关系在中心</el-radio-button>
-                <el-radio-button label="1">党组织关系已迁走</el-radio-button>
-              </el-radio-group>              
-						<el-form-item prop="qwdmc" label="迁往地党组织名称" v-if="type==1" :required="true">
-							<el-input v-model="partyForm.qwdmc"></el-input>
-						</el-form-item>
-						<el-form-item prop="qwdlxr" label="迁往地联系人" v-if="type==1" :required="true">
-							<el-input v-model="partyForm.qwdlxr"></el-input>
-						</el-form-item>
-						<el-form-item prop="qwdlxdh" label="迁往地联系电话" v-if="type==1" :required="true">
-							<el-input v-model="partyForm.qwdlxdh"></el-input>
-						</el-form-item>
-              
-						<el-form-item prop="image" label="确认函" :required="true">
-							<el-upload
-                class="avatar-uploader"
-                :action="'/party/api/upload?id='+partyForm._id"
-                :show-file-list="false"
-                :on-success="handleAvatarSuccess"
-                :before-upload="beforeAvatarUpload">
-                <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                <p>上传确认函照片</p>
-              </el-upload>
+						<el-form-item prop="remark" label="备注">
+							<el-input v-model="dataForm.remark"></el-input>
 						</el-form-item>
 
 						<el-form-item>
-								<el-button type="primary" @click="submitForm('partyForm')" :style="{width: '100%'}">确认无误提交</el-button>
+								<el-button type="primary" @click="submitForm('dataForm')" :style="{width: '100%'}">确认无误提交</el-button>
 							</el-form-item>
 					</el-form>
 	  		</el-card>
@@ -98,57 +79,69 @@
 
 <script>
 import api from '@/api'
+import villages from '@/api/village'
+import areas from '@/api/area'
 
 const fields = [
-  "xm",
-  "szdzb",
-  "sfzh",
-  "xb",
-  "mz",
-  "csrq",
-  "xl",
-  "rylb",
-  "rdrq",
-  "zzrq",
-  "gzgw",
-  "sjh",
-  "gddh",
-  "jtzz",
-  "djzt",
-  "sfld",
-  "wclx"
+  "dept",
+  "name",
+  "mobile",
+  "number",
+  "area",
+  "user_name",
+  "user_contact",
+  "remark"
 ];
-const rules = fields.reduce(
-  (p, c) => ({
-    ...p,
-    [c]: [{ required: true, message: "不能为空", trigger: "blur" }]
-  }),
-  {}
-);
+const fields2 = [
+  ...fields,
+  "village",
+  "building",
+  "unit",
+  "door",
+  "user_mobile"
+];
 const initForm = fields.reduce(
   (p, c) => ({
     ...p,
     [c]: ""
   }),
-  { xh: "1" }
+  { }
 );
 export default {
   data() {
     return {
-      partyForm: initForm,
-      rules,
-      imageUrl: "",
-      type: "0"
+      dataForm: initForm,
+      type: "0",
+      areas,
     };
   },
   mounted() {
-    this.partyForm = this.$root.currentData;
+  },
+  computed: {
+    rules() {
+      const _fileds = this.type == '0' ? fields2 : fields;
+
+      const _rules = _fileds.reduce(
+        (p, c) => ({
+          ...p,
+          [c]: [{ required: true, message: "不能为空", trigger: "blur" }]
+        }),
+        {}
+      );
+      return _rules;
+    },
+    villages() {
+      if(this.dataForm.area){
+        return villages(this.dataForm.area);
+      }
+      return [];
+    }
   },
   methods: {
     async submitForm(formName) {
       this.$refs[formName].validate(async valid => {
         if (valid) {
-          const res = await api.submit(this.type, this.partyForm);
+          const res = await api.submit(this.type, this.dataForm);
           console.log(res);
           if (res.errcode === 0) {
           this.$root.finish = true;
@@ -173,32 +166,6 @@ export default {
         }
       });
     },
-    handleAvatarSuccess(res, file) {
-      console.log({res, file});
-      if(res.errcode !== 0){
-          this.$notify.error({
-            title: "错误",
-            message: "文件上传失败",
-          });
-          return;
-      }
-      this.imageUrl = URL.createObjectURL(file.raw);
-      this.partyForm.image = res.id;
-      this.$message({ type: "success", message: "文件上传成功" });
-    },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.$message({ type: "error", message: "上传确认函图片只能是 JPG 格式!", duration: 3000});
-      }
-      if (!isLt2M) {
-        //this.$message.error("上传确认函图片大小不能超过 2MB!");
-        this.$message({ type: "error", message: "上传确认函图片大小不能超过 2MB!", duration: 3000});
-      }
-      return isJPG && isLt2M;
-    },
   }
 };
 </script>
@@ -219,28 +186,7 @@ export default {
 .main .el-form-item {
   margin-bottom: 5px;
 }
-  .avatar-uploader .el-upload {
-    border: 2px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    margin: 20px;
-  }
-  .avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
-  }
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
-    text-align: center;
-  }
-  .avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
-  }
+.main .el-form-item .el-select {
+  width: 100%;
+}
 </style>

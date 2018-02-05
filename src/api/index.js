@@ -1,13 +1,20 @@
 import axios from 'axios'
 
 export default {
-  async query ({sfzh}) {
-    const res = await axios.get('/party/api/query?sfzh='+sfzh);
-    return res.data;
-  },
 
   async submit (type, formData) {
-    const res = await axios.post(`/party/api/submit?type=${type}`, formData);
+    if(type == '1'){
+      const fields = [  "village",
+        "building",
+        "unit",
+        "door",
+        "user_mobile"
+      ];
+      fields.forEach(f=>{
+        delete formData[f];
+      });
+    }
+    const res = await axios.post(`/race/api/submit?type=${type}`, formData);
     return res.data;
   },
 }
