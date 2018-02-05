@@ -34,7 +34,7 @@
               </el-select>
 						</el-form-item>
 						<el-form-item prop="village" label="用户小区" v-if="type == '0'" >
-              <el-select v-model="dataForm.village" placeholder="请选择小区">
+              <el-select v-model="dataForm.village" placeholder="请选择小区" filterable>
                 <el-option
                       v-for="(item,i) in villages"
                       :key="i"
@@ -132,7 +132,8 @@ export default {
     },
     villages() {
       if(this.dataForm.area){
-        return villages(this.dataForm.area);
+        const rs = villages(this.dataForm.area);
+        return rs;
       }
       return [];
     }
